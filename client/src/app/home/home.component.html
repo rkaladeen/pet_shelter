@@ -1,0 +1,15 @@
+<div class="container">
+  <div class="jumbotron mt-3">
+    <h1>MEAN Belt Exam</h1>
+    <h4>Developed by: Raj Kaladeen</h4>
+  </div>
+    <h1>Option G (Pet Shelter)</h1>
+    <p>Create an application that allows users to add and update pets to a shelter.&nbsp;</p>
+    <p>Use Angular and use Express for the backend. Make sure that you also integrate and save data to MongoDB.</p>
+    <p><img class="w-100" src="https://s3.amazonaws.com/General_V88/boomyeah2015/codingdojo/curriculum/content/chapter/petShelterMay.png"><br> <br></p>
+    <h5>For a red belt:</h5>
+    <ul>
+    <li>CRUD operations all working<ul><li>Able to create new pets</li><li>All pets are displayed upon visiting the website</li><li>User may choose a pet to see its details</li><li>Able to edit each pet<ul><li>Edit form is pre-populated with the pet’s existing data</li></ul></li><li>Able to adopt each pet, which removes the pet from the database</li></ul></li><li>Routing<ul><li>Root route redirects to /pets and displays all pets</li><li>Route ‘pets/new’ displays the form to create a new pet<ul><li>Successful creation and cancel redirect to the root route</li></ul></li><li>Route ‘/pets/:id’ displays all the details of a particular pet</li><li>Route ‘/pets/:id/edit’ displays the pre-populated form to edit a pet<ul><li>Successful edit and cancel redirect to the pet’s details page</li></ul></li></ul></li><li>Backend validations<ul><li>All pets must have a name of at least 3 characters</li><li>All pets must have a type of at least 3 characters</li><li>All pets must have a description of at least 3 characters</li><li>All pets may have up to three skills</li><li>Error messages inform the user which requirements are not met when creating a pet</li><li>Error messages are custom-written (not the mongoose default messages)</li></ul></li><li>HTML and CSS reflect the wireframe to at least 75% accuracy</li></ul>
+    <h5>For a black belt:</h5>
+    <ul><li>Deployed, and not on Heroku</li><li>ALL of the following four features:<ul><li>Each pet’s like button is disabled after clicking it until the component is reloaded. <strong>Note:</strong> This does not necessarily mean that a user may only like a pet once, unless you want to take on that challenge. The button can be re-enabled by refreshing or otherwise reloading the component.</li><li>Do not allow duplicate pet names in the database. Display an error message if the user attempts to create a pet with a name that already exists in the database.</li><li>Sort the pets by type so that all the dogs are listed together, all the rabbits together, and so on.</li><li>Maintain the validations for creating a pet when editing a pet. Display error messages if requirements are not met when editing.</li></ul></li></ul>
+</div>

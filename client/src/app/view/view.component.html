@@ -1,0 +1,33 @@
+<div class="container">
+  <div class="jumbotron mt-3 mx-auto">
+    <h3 class="jumbotron mx-auto bg-dark text-light py-2">Details about {{ currentPet.name }}</h3>
+    <table class="table jumbotron bg-light col-lg-8 col-md-10 mx-auto text-center">
+      <tr>
+        <th>Pet Type: </th>
+        <td>{{ currentPet.type }}</td>
+      </tr>
+      <tr>
+        <th>Description: </th>
+        <td>{{ currentPet.description }}</td>
+      </tr>
+      <tr class="bg-dark text-light">
+        <th>Skills: </th>
+        <td>
+          <tr>{{ currentPet.skill_1 }}</tr>
+          <tr>{{ currentPet.skill_2 }}</tr>
+          <tr>{{ currentPet.skill_3 }}</tr>
+        </td>
+      </tr>
+      <tr>
+        <th>Likes: </th>
+        <td>{{ currentPet.likes }}</td>
+      </tr>
+    </table>
+    <button class="btn btn-primary mr-3" (click)="likePet()" [disabled]="likeClick">
+      Like!
+      <i class="far fa-thumbs-up"></i>
+    </button>
+    <button class="btn btn-success" (click)="adoptPet()" routerLink="/pets">Adopt</button>
+
+  </div>
+</div>

@@ -1,0 +1,19 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <!-- <a class="navbar-brand jumbotron py-2 mb-0 bg-dark text-warning" href="/">{{ title }}</a> -->
+  <h1 class="jumbotron py-2 mb-0 bg-dark text-warning">{{ title }}</h1>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="fas fa-bars fa-2x text-dark"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav nav-pills mx-auto">
+      <li class="nav-item" *ngFor="let x of tabs; index as i">
+        <a class="nav-link btn btn-light rounded border-0 ml-4" 
+           routerLinkActive="active"
+           [routerLinkActiveOptions]="{ exact: true }"
+           routerLink="/{{ tabs[i].route }}">{{ tabs[i].name }}</a>
+      </li>
+    </ul>
+    
+  </div>
+</nav>

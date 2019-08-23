@@ -1,0 +1,182 @@
+<div class="container">
+  <div class="jumbotron mt-3 p-3 col-lg-10 mx-auto">
+    <h1>{{ heading }}</h1>
+    
+    <form [formGroup]="newPet">
+      <div class="row">
+      <div class="col-md-6">
+        
+        <div class="form-group">
+          <label>Name</label>
+          <input type="text" 
+                 class="form-control" 
+                 value="{{ newPet.value.name }}"
+                 formControlName="name"
+                 [ngClass]="{'is-invalid':newPet.get('name').touched && newPet.get('name').invalid || nameExists, 'is-valid': newPet.get('name').touched && !newPet.get('name').invalid && !nameExists}"
+                 
+                 (ngModelChange)="checkName($event)"
+                 />
+        
+          <div class="invalid-feedback" 
+               *ngIf="newPet.get('name').touched && newPet.get('name').invalid">
+            <div *ngIf="newPet.get('name').errors.required">
+              Name is required!
+            </div>
+            <div *ngIf="newPet.get('name').errors.minlength">
+              Name must have more than 3 character
+            </div>
+          </div>
+  
+          <div class="invalid-feedback" *ngIf="nameExists">
+            <div *ngIf="nameExists">
+                Name already exists!
+            </div>
+          </div>
+  
+          <div class="valid-feedback" *ngIf="newPet.get('name').touched && !newPet.get('name').invalid!nameExists">
+              <div *ngIf="!nameExists">
+                  Name is unique!
+              </div>
+            </div>
+  
+        </div> <!--End of Name Form Control-->
+  
+      <div class="form-group">
+        <label>Type</label>
+        <input type="text" 
+                class="form-control" 
+                value="{{ newPet.value.type }}"
+                formControlName="type"
+                [ngClass]="{'is-invalid':newPet.get('type').touched && newPet.get('type').invalid, 'is-valid': newPet.get('type').touched && !newPet.get('type').invalid}"
+                />
+      
+        <div class="invalid-feedback" 
+              *ngIf="newPet.get('type').touched && newPet.get('type').invalid">
+          
+          <div *ngIf="newPet.get('type').errors.required">
+            Type is required!
+          </div>
+  
+          <div *ngIf="newPet.get('type').errors.minlength">
+            Type must have more than 3 character
+          </div>
+        </div>
+      </div> <!--End of Type Form Control-->
+  
+        <!-- </div> -->
+  
+        <div class="form-group">
+          <label>Description</label>
+          <textarea type="text" 
+                  class="form-control"
+                  rows="3" 
+                  formControlName="description"
+                  [ngClass]="{'is-invalid':newPet.get('description').touched && newPet.get('description').invalid}">
+                  {{ newPet.value.description }}
+          </textarea>
+        
+          <small></small>
+          <div class="invalid-feedback" 
+                *ngIf="newPet.get('description').touched && newPet.get('description').invalid">
+            <div *ngIf="newPet.get('description').errors.required">
+              Description is required!
+            </div>
+            <div *ngIf="newPet.get('description').errors.minlength">
+              Description must have more than 3 character
+            </div>
+            <div *ngIf="newPet.get('description').errors.maxlength">
+                Description must not have more than 100 character
+              </div>
+          </div>
+        </div> <!--End of Description Form Control-->
+        <div>
+          <button class="btn btn-success mr-1"
+                  [disabled]="!newPet.valid"
+                  [class.d-inline]="buttons.create" 
+                  [class.d-none]="!buttons.create" 
+                  (click)="submitPet()">Create</button>
+          <button class="btn btn-warning mr-1"
+                  [disabled]="!newPet.valid" 
+                  [class.d-inline]="buttons.update" 
+                  [class.d-none]="!buttons.update"
+                  (click)="editPet()">Update</button>
+            <button class="btn btn-secondary" 
+                  routerLink="/pets">Cancel</button>
+          </div>
+      </div> <!--End of First Column-->
+      
+      <div class="col-md-6">
+
+        <div class="jumbotron bg-light">
+          <label>Skills (optional)</label>
+          
+          <div class="form-group">
+            <label>Skill 1</label>
+            <input type="text" 
+                    class="form-control"
+                    value="{{ newPet.value.skill_1 }}"
+                    formControlName="skill_1"
+                    [ngClass]="{'is-invalid':newPet.get('skill_1').touched && newPet.get('skill_1').invalid}"
+                    />
+  
+            <div class="invalid-feedback" 
+                  *ngIf="newPet.get('skill_1').touched && newPet.get('skill_1').invalid">
+  
+              <div *ngIf="newPet.get('skill_1').errors.minlength">
+                  First Skill must have more than 3 character
+              </div>
+            </div>
+          </div> <!--End of Skill 1 Form Control-->
+  
+          <div class="form-group">
+            <label>Skill 2</label>
+            <input type="text" 
+                    class="form-control"
+                    value="{{ newPet.value.skill_2 }}"
+                    formControlName="skill_2"
+                    [ngClass]="{'is-invalid':newPet.get('skill_2').touched && newPet.get('skill_2').invalid}"
+                    />
+  
+            <div class="invalid-feedback" 
+                  *ngIf="newPet.get('skill_2').touched && newPet.get('skill_2').invalid">
+  
+              <div *ngIf="newPet.get('skill_2').errors.minlength">
+                  Second Skill must have more than 3 character
+              </div>
+            </div>
+          </div> <!--End of Skill 2 Form Control-->
+  
+          <div class="form-group">
+            <label>Skill 3</label>
+            <input type="text" 
+                    class="form-control"
+                    value="{{ newPet.value.skill_3 }}"
+                    formControlName="skill_3"
+                    [ngClass]="{'is-invalid':newPet.get('skill_3').touched && newPet.get('skill_3').invalid}"
+                    />
+  
+            <div class="invalid-feedback" 
+                  *ngIf="newPet.get('skill_3').touched && newPet.get('skill_3').invalid">
+  
+              <div *ngIf="newPet.get('skill_3').errors.minlength">
+                  Third Skill must have more than 3 character
+              </div>
+            </div>
+          </div> <!--End of Skill 3 Form Control-->
+  
+        </div>
+      </div> <!--End of Second Column-->
+
+      <div class="invalid-feedback d-block" *ngIf="failedBackEnd">
+
+          <div *ngFor="let error of backEndErrors | keyvalue">
+            Server Errors: {{ error.value.message }}
+          </div>
+          
+        </div>
+      </div> <!--End of Row-->
+    </form>
+
+  </div>
+</div>
+
