@@ -14,12 +14,10 @@ export class AddEditComponent implements OnInit {
   heading: string;
   buttons: object;
   newPet: FormGroup;
-  nameExists:boolean = null;
+  nameExists:boolean = false;
   currentPet: any = [];
   allPets: any = [];
   globalId: any;
-  
-
   searchVal: string = "";
   failedBackEnd: any = false;
   backEndErrors: any = {};
@@ -37,19 +35,24 @@ export class AddEditComponent implements OnInit {
   getAllPets() {
     let ob = this._http.getAll();
     ob.subscribe(data => {
-      console.log(data);
+      // console.log(data);
       this.allPets = data;
     })
   }
 
   checkName(event) {
+    console.log(event);
     for (let pet of this.allPets) {
       if (pet.name.toLowerCase() == event.toLowerCase()) {
-        console.log("Name exits")
         this.nameExists = true;
-        console.log(this.nameExists);
+        // console.log(this.newPet.status);
+        this.newPet.setErrors({nameExists: true})
+        break;
       } else {
-        this.nameExists = null;
+        this.nameExists = false;
+        this.newPet.setErrors({nameExists: null})
+        // console.log("Name is FALSE");
+
       }
 
     }
@@ -91,7 +94,7 @@ export class AddEditComponent implements OnInit {
       if (Object.keys(pet_id).length != 0) {
         let petData = this._http.getOne(pet_id.pet_id)
         petData.subscribe((data: any) => {
-          console.log(data);
+          // console.log(data);
           if (data.name != "ValidationError") {
             this.newPet.setValue({
               _id: data['_id'],
@@ -105,7 +108,7 @@ export class AddEditComponent implements OnInit {
             
           }
         })
-        console.log(this.newPet);
+        // console.log(this.newPet);
       }
 
     })

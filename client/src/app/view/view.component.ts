@@ -13,7 +13,7 @@ export class ViewComponent implements OnInit {
   likeClick: boolean;
   failedBackEnd: any = false;
   backEndErrors: any = {};
-  constructor( private _http: HttpService, 
+  constructor( private _http: HttpService,
                private _router: Router, 
                private _route: ActivatedRoute) { }
 
@@ -27,7 +27,7 @@ export class ViewComponent implements OnInit {
       if (Object.keys(pet_id).length != 0) {
         let petData = this._http.getOne(pet_id.pet_id)
         petData.subscribe((data: any) => {
-          console.log(data);
+          // console.log(data);
           if (data.name != "ValidationError") {
             this.currentPet = {
               _id: data['_id'],
@@ -49,30 +49,30 @@ export class ViewComponent implements OnInit {
   }
 
 
-  serverValidator(data: any):void{
+  serverValidator(data: any, route: any):void{
     if (data.name == "ValidationError") {
       this.backEndErrors = data.errors;
       this.failedBackEnd = true;
     } else {
-      // this._router.navigate(['/pets']);
-      console.log(data);
+      this._router.navigate([route]);
+      // console.log(data);
     }
   }
 
   likePet() {
     this.currentPet.likes ++;
     this.likeClick = true;
-    console.log(this.currentPet);
+    // console.log(this.currentPet);
     let ob = this._http.updatePet(this.currentPet)
     ob.subscribe((data: any) => {
-      this.serverValidator(data);
+      this.serverValidator(data, `/pets/${this.currentPet.value._id}`);
     })
   }
 
   adoptPet() {
     let ob = this._http.adoptPet(this.currentPet._id)
     ob.subscribe((data: any) => {
-      this.serverValidator(data);
+      this.serverValidator(data, '/pets');
     })
   }
 

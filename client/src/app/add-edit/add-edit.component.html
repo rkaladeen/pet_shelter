@@ -12,8 +12,7 @@
                  class="form-control" 
                  value="{{ newPet.value.name }}"
                  formControlName="name"
-                 [ngClass]="{'is-invalid':newPet.get('name').touched && newPet.get('name').invalid || nameExists, 'is-valid': newPet.get('name').touched && !newPet.get('name').invalid && !nameExists}"
-                 
+                 [ngClass]="{'is-invalid':newPet.get('name').touched && (newPet.get('name').invalid || nameExists), 'is-valid': newPet.get('name').touched && !newPet.get('name').invalid && !nameExists}"
                  (ngModelChange)="checkName($event)"
                  />
         
@@ -33,8 +32,8 @@
             </div>
           </div>
   
-          <div class="valid-feedback" *ngIf="newPet.get('name').touched && !newPet.get('name').invalid!nameExists">
-              <div *ngIf="!nameExists">
+          <div class="valid-feedback" *ngIf="newPet.get('name').touched && !newPet.get('name').invalid && !nameExists">
+              <div *ngIf="!nameExist">
                   Name is unique!
               </div>
             </div>
@@ -100,7 +99,7 @@
                   [class.d-inline]="buttons.update" 
                   [class.d-none]="!buttons.update"
                   (click)="editPet()">Update</button>
-            <button class="btn btn-secondary" 
+          <button class="btn btn-secondary" 
                   routerLink="/pets">Cancel</button>
           </div>
       </div> <!--End of First Column-->
